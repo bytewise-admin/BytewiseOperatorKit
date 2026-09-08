@@ -1,0 +1,49 @@
+{
+  "_comment": [
+    "The EXACT set of OpenAPI 3.1 nullable-reference properties (`oneOf: [{$ref}, {type: null}]`)",
+    "that ../normalize-openapi.py is allowed to shim into an optional `$ref` in the",
+    "v1-operator-mobile contract. The transform fails loud unless the contract's set matches this",
+    "file exactly, so a contract change surfaces here for deliberate review instead of being",
+    "silently normalized. Each entry is the owning component schema, the property, and the target.",
+    "When a legitimate contract change adds or removes one, update this file AND the wrapper models",
+    "in the same change."
+  ],
+  "nullableRefs": [
+    {
+      "schema": "AnalyticsIssueDetailItem",
+      "property": "symbolication",
+      "ref": "#/components/schemas/AnalyticsIssueSymbolication",
+      "note": "A4.6 server-side symbolication block; an unarmed host serializes explicit null."
+    },
+    {
+      "schema": "AnalyticsIssueDetailResponse",
+      "property": "issue",
+      "ref": "#/components/schemas/AnalyticsIssueDetailItem",
+      "note": "Absent when the issue id resolves to nothing visible."
+    },
+    {
+      "schema": "AnalyticsReleaseItem",
+      "property": "changelog",
+      "ref": "#/components/schemas/AnalyticsReleaseChangelogRef",
+      "note": "Null for a release with no linked changelog entry."
+    },
+    {
+      "schema": "CommerceRevenueResponse",
+      "property": "trials",
+      "ref": "#/components/schemas/CommerceRevenueTrialsSection",
+      "note": "Null when the trials module is not enabled for the project."
+    },
+    {
+      "schema": "CustomerTimelineRow",
+      "property": "meta",
+      "ref": "#/components/schemas/CustomerTimelineMeta",
+      "note": "M6.5 typed allow-listed timeline metadata; an unknown-kind event serializes null."
+    },
+    {
+      "schema": "MyTaskRow",
+      "property": "context",
+      "ref": "#/components/schemas/MyTaskContext",
+      "note": "M6.2 server-authorized {kind,id} routing token; null when no source is reachable."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+# swift-openapi-generator configuration for BytewiseOperatorKit.
+# Deterministic, committed-output pipeline (see ../regenerate.sh). Access is `internal` so the
+# generated transport core never leaks into the public API — the hand-written wrapper is the only
+# public surface. `idiomatic` naming keeps the generated Swift stable and readable.
+generate:
+  - types
+  - client
+accessModifier: internal
+namingStrategy: idiomatic
