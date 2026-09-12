@@ -95,9 +95,19 @@ public struct OperatorMeResponse: Sendable, Hashable {
     public let displayName: String?
     public let isSystemAdmin: Bool
     public let twoFactorEnabled: Bool
+    /// The calling credential's class as the server reports it (`standard` | `mobileCompanion` |
+    /// `cliClient` | `mcpAgent`); nil on a cookie session. Carried as the wire string so an additive
+    /// server-side value never fails decoding (operator-tooling expansion, F1a).
+    public let tokenKind: String?
+    /// The calling credential's public token id; nil on a cookie session.
+    public let tokenId: String?
+    /// The credential's EFFECTIVE scopes (declared ∩ the owner's live grants); nil when it has no scope
+    /// ceiling (a cookie session, or an acts-as-owner token such as the mobile companion's).
+    public let scopes: [String]?
     init(_ g: Components.Schemas.OperatorMeResponse) {
         id = g.id; email = g.email; displayName = g.displayName
         isSystemAdmin = g.isSystemAdmin; twoFactorEnabled = g.twoFactorEnabled
+        tokenKind = g.tokenKind?.rawValue; tokenId = g.tokenId; scopes = g.scopes
     }
 }
 

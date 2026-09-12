@@ -4481,6 +4481,23 @@ internal enum Components {
             internal var id: Swift.Int32
             /// - Remark: Generated from `#/components/schemas/OperatorMeResponse/isSystemAdmin`.
             internal var isSystemAdmin: Swift.Bool
+            /// - Remark: Generated from `#/components/schemas/OperatorMeResponse/scopes`.
+            internal var scopes: [Swift.String]?
+            /// - Remark: Generated from `#/components/schemas/OperatorMeResponse/tokenId`.
+            internal var tokenId: Swift.String?
+            /// The calling credential's class (null on a cookie session).
+            ///
+            /// - Remark: Generated from `#/components/schemas/OperatorMeResponse/tokenKind`.
+            internal enum TokenKindPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case cliClient = "cliClient"
+                case mcpAgent = "mcpAgent"
+                case mobileCompanion = "mobileCompanion"
+                case standard = "standard"
+            }
+            /// The calling credential's class (null on a cookie session).
+            ///
+            /// - Remark: Generated from `#/components/schemas/OperatorMeResponse/tokenKind`.
+            internal var tokenKind: Components.Schemas.OperatorMeResponse.TokenKindPayload?
             /// - Remark: Generated from `#/components/schemas/OperatorMeResponse/twoFactorEnabled`.
             internal var twoFactorEnabled: Swift.Bool
             /// Creates a new `OperatorMeResponse`.
@@ -4490,18 +4507,27 @@ internal enum Components {
             ///   - email:
             ///   - id:
             ///   - isSystemAdmin:
+            ///   - scopes:
+            ///   - tokenId:
+            ///   - tokenKind: The calling credential's class (null on a cookie session).
             ///   - twoFactorEnabled:
             internal init(
                 displayName: Swift.String? = nil,
                 email: Swift.String? = nil,
                 id: Swift.Int32,
                 isSystemAdmin: Swift.Bool,
+                scopes: [Swift.String]? = nil,
+                tokenId: Swift.String? = nil,
+                tokenKind: Components.Schemas.OperatorMeResponse.TokenKindPayload? = nil,
                 twoFactorEnabled: Swift.Bool
             ) {
                 self.displayName = displayName
                 self.email = email
                 self.id = id
                 self.isSystemAdmin = isSystemAdmin
+                self.scopes = scopes
+                self.tokenId = tokenId
+                self.tokenKind = tokenKind
                 self.twoFactorEnabled = twoFactorEnabled
             }
             internal enum CodingKeys: String, CodingKey {
@@ -4509,6 +4535,9 @@ internal enum Components {
                 case email
                 case id
                 case isSystemAdmin
+                case scopes
+                case tokenId
+                case tokenKind
                 case twoFactorEnabled
             }
         }

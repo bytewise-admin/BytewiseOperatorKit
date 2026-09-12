@@ -3097,6 +3097,34 @@
           "isSystemAdmin": {
             "type": "boolean"
           },
+          "scopes": {
+            "items": {
+              "type": "string"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "tokenId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "tokenKind": {
+            "description": "The calling credential\u0027s class (null on a cookie session).",
+            "enum": [
+              "cliClient",
+              "mcpAgent",
+              "mobileCompanion",
+              "standard"
+            ],
+            "type": [
+              "null",
+              "string"
+            ]
+          },
           "twoFactorEnabled": {
             "type": "boolean"
           }
@@ -4375,11 +4403,6 @@
             ]
           }
         },
-        "required": [
-          "notes",
-          "severity",
-          "status"
-        ],
         "type": "object"
       }
     },

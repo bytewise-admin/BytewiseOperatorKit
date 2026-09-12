@@ -26,13 +26,12 @@ operator's own app, where moving to a current OS is free.
 > truth is the private Bytewise Solutions repository; this tree is produced by `scripts/swift-kit-mirror.sh`
 > and pushed here. Issues are welcome; code changes are made upstream.
 >
-> **Status 2026-09-08:** the repository exists and the first release version is **0.1.0**. The snippet
-> above works from the moment the `0.1.0` tag is pushed here — until then, resolution finds no version.
-> Inside the source repository the kit is consumable with `.package(path: "sdk/swift/BytewiseOperatorKit")` and always
-> was; what did not work, and is what this mirror fixes, is `.package(url:)` against the source
-> repository — the manifest lives under `sdk/swift/` rather than at the root, the internal release tag
-> `swift-sdk-v0.2.0` is not a version SwiftPM recognizes, and that repository is private. See
-> `docs/deployment/swift-sdk-packaging.md` upstream.
+> **Published 2026-09-08: `0.1.0` is tagged here and resolves.** Verified from a throwaway consumer
+> against this public URL, not just pushed. What this mirror fixes is that `.package(url:)` against the
+> source repository could never work — the manifest lives under `sdk/swift/` rather than at the root,
+> the internal release tag `swift-sdk-v0.2.0` is not a version SwiftPM recognizes, and that repository
+> is private. Inside the source repository the kit is also consumable with
+> `.package(path: "sdk/swift/BytewiseOperatorKit")`. See `docs/deployment/swift-sdk-packaging.md` upstream.
 
 Licensed MIT (`LICENSE` in this package). The licence covers this kit, not the Bytewise Solutions
 server — see `LICENSE-PACKAGES.md` in the source repository for the exact scope.

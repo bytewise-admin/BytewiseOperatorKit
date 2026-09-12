@@ -151,7 +151,7 @@ final class BytewiseOperatorKitTests: XCTestCase {
 
         let bootstrapClient = makeClient { _ in
             stubJSON(200, #"""
-            {"me":{"id":1,"email":"op@x.test","displayName":"Op","isSystemAdmin":false,"twoFactorEnabled":true},
+            {"me":{"id":1,"email":"op@x.test","displayName":"Op","isSystemAdmin":false,"twoFactorEnabled":true,"tokenKind":"mobileCompanion","tokenId":"AbCdEfGhIjKlMnOpQrStUv","scopes":null},
              "projects":[{"id":9,"slug":"acme","name":"Acme","platforms":3,"role":"owner",
                           "enabledModules":["analytics","feedback"],
                           "permissions":["analytics.triage","analytics.view","feedback.manage","feedback.read","project.read"],
@@ -161,6 +161,11 @@ final class BytewiseOperatorKitTests: XCTestCase {
         let bootstrap = try await bootstrapClient.dashboard.bootstrap()
         XCTAssertEqual(bootstrap.me.email, "op@x.test")
         XCTAssertTrue(bootstrap.me.twoFactorEnabled)
+        // F1a credential introspection survives the public mirror: the kind as its wire string, the public
+        // id, and a null scope ceiling (the mobile companion acts as owner).
+        XCTAssertEqual(bootstrap.me.tokenKind, "mobileCompanion")
+        XCTAssertEqual(bootstrap.me.tokenId, "AbCdEfGhIjKlMnOpQrStUv")
+        XCTAssertNil(bootstrap.me.scopes)
         XCTAssertEqual(bootstrap.projects.count, 1)
         XCTAssertEqual(bootstrap.projects[0].enabledModules, ["analytics", "feedback"])
         XCTAssertEqual(bootstrap.projects[0].permissions, // gates capability actions, not just tab visibility
